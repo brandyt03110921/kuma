@@ -12,7 +12,7 @@ stage('Deploy') {
 
   sh 'make deis-create-and-or-config'
   sh 'make render-k8s-templates'
-  sh "KUBECONFIG=${env.KUBECONFIG} kubectl --namespace=${env.DEIS_APP} apply -f k8s/"
+  sh "KUBECONFIG=${env.KUBECONFIG} kubectl -n ${env.DEIS_APP} apply -f k8s/"
   sh 'make deis-pull'
   sh 'make deis-migrate'
   sh 'make demo-db-import'
